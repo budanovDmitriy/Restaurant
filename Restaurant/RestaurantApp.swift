@@ -10,8 +10,12 @@ import SwiftUI
 @main
 struct RestaurantApp: App {
     var body: some Scene {
+        let order = Order()
+        let favorite = Favorite()
+
         WindowGroup {
-            ContentView()
+            AppView().environmentObject(order)
+                .environmentObject(favorite)
         }
     }
 }
