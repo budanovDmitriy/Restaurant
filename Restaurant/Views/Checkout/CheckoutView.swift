@@ -10,21 +10,28 @@ import SwiftUI
 struct CheckoutView: View {
     
     @EnvironmentObject var order: Order
+    @Environment(\.presentationMode) var presentationMode
     
+    // Static data
     static let paymentTypes = ["Наличными", "Visa", "MasterCard", "Maestro", "Белкарт", "Мир"]
-    static let tips = [0,10,15,20,25]
+    static let tips = [0, 10, 15, 20, 25]
     static let pickUpTime = ["Сейчас", "Сегодня вечером", "Завтра Утром"]
     
-    @State private var paymentType = 0
+    // Pickers
+    @State private var paymentType = paymentTypes[0]
+    @State private var tipsAmount = tips[0]
+    @State private var pickUpAt = pickUpTime[0]
+    
+    // Views
     @State private var isUseLoyaltyDetails = false
     @State private var loyaltyNumbers = ""
-    @State private var tipsAmount = 0
+    
+    //Navigation
     @State private var isShowingPaymentAlert = false
-    @State private var pickUpAt = 0
     
     var totalPrice: Double {
         let total = Double(order.total)
-        let tip = total / 100 * Double(Self.tips[tipsAmount])
+        let tip = total / 100 * Double(tipsAmount)
         return total + tip
     }
     
@@ -32,8 +39,8 @@ struct CheckoutView: View {
         Form {
             Section {
                 Picker("Выберите способ оплаты", selection: $paymentType) {
-                    ForEach(0 ..< Self.paymentTypes.count) {
-                        Text(Self.paymentTypes[$0])
+                    ForEach(Self.paymentTypes, id: \.self) { paymentTypeValue in
+                        Text(paymentTypeValue)
                     }
                 }
                 
@@ -48,16 +55,16 @@ struct CheckoutView: View {
             
             Section (header: Text("Оставить чаевые?")) {
                 Picker("Размер чаевых: ", selection: $tipsAmount) {
-                    ForEach(0 ..< Self.tips.count) {
-                        Text("\(Self.tips[$0])")
+                    ForEach(Self.tips, id: \.self) { tipsValue in
+                        Text("\(tipsValue)")
                     }
                 }.pickerStyle(SegmentedPickerStyle())
             }
             
             Section(header: Text("Когда забарть?")) {
                 Picker("Время заказа", selection: $pickUpAt) {
-                    ForEach(0 ..< Self.pickUpTime.count) {
-                        Text(Self.pickUpTime[$0])
+                    ForEach(Self.pickUpTime, id: \.self) { pickUpTimeValue in
+                        Text(pickUpTimeValue)
                     }
                 }.pickerStyle(SegmentedPickerStyle())
                 
@@ -65,14 +72,29 @@ struct CheckoutView: View {
             
             Section ( header: Text("Итого: Рублей \(totalPrice, specifier: "%.2f")").font(.largeTitle)) {
                 Button("Подтвердить покупку") {
+                    // TODO: Включить спинер с загрузкой, сделать запрос на заказ
                     self.isShowingPaymentAlert.toggle()
+                    
                 }
             }
             
         }.navigationBarTitle("Заказ", displayMode: .inline)
             .alert(isPresented: $isShowingPaymentAlert) {
-                Alert(title: Text("Платеж подтвержден"), message: Text("Итого  \(totalPrice, specifier: "%2.f") рублей "), dismissButton: .default(Text("Ok")))
-        }
+                Alert(
+                    title: Text("Платеж подтвержден"),
+                    message: Text("Итого  \(totalPrice, specifier: "%2.f") рублей "),
+                    dismissButton: .default(Text("Ok"), action: {
+                        
+                        
+                                    
+                       
+                        
+                        order.clean()
+                        presentationMode.wrappedValue.dismiss()
+                        // TODO: Выключить спинер
+                    })
+                )
+            }
     }
 }
 

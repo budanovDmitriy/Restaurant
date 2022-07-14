@@ -19,56 +19,36 @@ class Order: ObservableObject {
             return 0
         }
     }
+    
+    func countOf(_ item: MenuItem) -> Int {
+        guard let index = items.firstIndex(of: item) else { return 0 }
+        return items[index].quantity
+    }
 
     func add(item: MenuItem) {
-        var fl = false
-        for index in 0..<items.count {
-            if items[index].name == item.name {
-                items[index].quantity += 1
-                fl = true
-                break
-            }
+        if let index = items.firstIndex(of: item) {
+            items[index].quantity += 1
+        } else {
+            var addingItem = item
+            addingItem.quantity = 1
+            items.append(addingItem)
         }
-        
-        if !fl {
-            items.append(item)
-            for index in 0..<items.count {
-                if items[index].name == item.name {
-                    items[index].quantity += 1
-                    break
-                }
-            }
-        }
-        
     }
 
     func remove(item: MenuItem) {
-        var em = true
-        for index in 0..<items.count {
-            if items[index].name == item.name {
-                if items[index].quantity == 1 {
-                    items.remove(at: index)
-                    em = false
-                    break
-                } else {
-                    if items[index].quantity == 0 {
-                        items.remove(at: index)
-                        em = false
-                        break
-                    } else {
-                        items[index].quantity -= 1
-                        em = false
-                        break
-                    }
-                    
-                }
-            }
+        guard let index = items.firstIndex(of: item) else {
+            print("empty")
+            return
         }
         
-        if em {
-            print("empty")
+        items[index].quantity -= 1
+        if items[index].quantity < 1 {
+            items.remove(at: index)
         }
     }
     
+    func clean() {
+        items.removeAll()
+    }
    
 }

@@ -26,6 +26,12 @@ struct MenuItem: Codable, Equatable, Identifiable {
     var thumbnailImage: String {
         "\(imageName)-mini"
     }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.name == rhs.name
+            && lhs.description == rhs.description
+            && lhs.price == rhs.price
+    }
 
     static let example = MenuItem(id: UUID(), name: "Драники", imageName: "mexican", nationalDish: "Белорусское", price: 6000, restrictions: ["G", "V"], description: "Вкусное блюдо из картофеля с мясом", quantity: 0)
 

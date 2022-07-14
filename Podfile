@@ -6,8 +6,6 @@ target 'Restaurant' do
   use_frameworks!
 
   # Pods for Restaurant
-pod 'Firebase'
-pod 'Firebase/Auth'
-pod 'Firebase/Database'
-pod 'Firebase/Analytics'
+pod 'Alamofire'
+
 end

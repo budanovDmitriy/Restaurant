@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 extension Bundle {
@@ -26,4 +27,7 @@ extension Bundle {
 
         return loaded
     }
+    
 }
+
+

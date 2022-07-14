@@ -22,6 +22,7 @@
 		1C650F4F286DC56B00467165 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C650F4E286DC56B00467165 /* MenuView.swift */; };
 		1C650F51286DC57E00467165 /* MenuDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C650F50286DC57E00467165 /* MenuDetailView.swift */; };
 		1C650F53286DC6BA00467165 /* MenuItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C650F52286DC6BA00467165 /* MenuItemRow.swift */; };
+		1CBA27D5288050AB00093464 /* makeOrder.json in Resources */ = {isa = PBXBuildFile; fileRef = 1CBA27D4288050AB00093464 /* makeOrder.json */; };
 		3798F2AF6F598DF65BB5F6DA /* Pods_Restaurant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2CE4818E29D0D9CC862C69 /* Pods_Restaurant.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		1C650F4E286DC56B00467165 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		1C650F50286DC57E00467165 /* MenuDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailView.swift; sourceTree = "<group>"; };
 		1C650F52286DC6BA00467165 /* MenuItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemRow.swift; sourceTree = "<group>"; };
+		1CBA27D4288050AB00093464 /* makeOrder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = makeOrder.json; sourceTree = "<group>"; };
 		74C961D06939D72D19A46294 /* Pods-Restaurant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant.debug.xcconfig"; path = "Target Support Files/Pods-Restaurant/Pods-Restaurant.debug.xcconfig"; sourceTree = "<group>"; };
 		9A2CE4818E29D0D9CC862C69 /* Pods_Restaurant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Restaurant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 		1C650F35286DC12A00467165 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1CBA27D4288050AB00093464 /* makeOrder.json */,
 				1C650F36286DC13C00467165 /* menu.json */,
 			);
 			path = Data;
@@ -248,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CBA27D5288050AB00093464 /* makeOrder.json in Resources */,
 				1C650F37286DC13C00467165 /* menu.json in Resources */,
 				1C650F2D286DAE1900467165 /* Preview Assets.xcassets in Resources */,
 				1C650F2A286DAE1900467165 /* Assets.xcassets in Resources */,

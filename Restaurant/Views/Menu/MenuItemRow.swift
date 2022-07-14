@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct MenuItemRow: View {
-    static let colors: [String: UIColor] = ["D": .systemPurple, "G": .systemTeal, "N":.systemRed, "S": .systemBlue, "V": .systemGreen]
+    @State var stepperValue: Int = 5000
     @EnvironmentObject var order: Order
     var item: MenuItem
     
     var body: some View {
         NavigationLink(destination: MenuDetailView(item: item)) {
             HStack {
-                Image(item.thumbnailImage)
-                    .clipShape(Circle())
-                    .overlay(Circle()
-                    .stroke(Color.gray, lineWidth: 2))
+                ZStack {
+                    Image(item.thumbnailImage)
+                        .clipShape(Circle())
+                        .overlay(Circle()
+                        .stroke(Color.gray, lineWidth: 2))
+                    Text("\(order.countOf(item))")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                }
                 
                 VStack(alignment: .leading) {
                     Text(item.name).font(.headline)
@@ -26,14 +30,15 @@ struct MenuItemRow: View {
                 }.layoutPriority(1)
                 
                 Spacer()
-                
-                Stepper("",
-                        onIncrement: {
+            
+                Stepper(
+                    "", onIncrement: {
                             self.order.add(item: self.item)
                         },
                         onDecrement: {
                             self.order.remove(item: self.item)
                         })
+                
             }
         }
     }
