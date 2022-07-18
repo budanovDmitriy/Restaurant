@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Foundation
+import Alamofire
 
 struct MenuView: View {
+    @State private var menu = [MenuSection]()
     
-    let menu = Bundle.main.decode([MenuSection].self, from: "menu.json")
+    
     
     var body: some View {
         NavigationView {
@@ -24,12 +27,26 @@ struct MenuView: View {
             }
             .navigationBarTitle("Меню")
             .listStyle(GroupedListStyle())
-        }
+        }.onAppear(perform: fetchMenu)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MenuView()
+    }
+}
+
+extension MenuView {
+    func fetchMenu() {
+        let request = AF.request("https://raw.githubusercontent.com/budanovDmitriy/Restaurant/main/Restaurant/Data/menu.json")
+        request.validate().responseDecodable(of: [MenuSection].self) { response in
+            guard let items = response.value else {
+                fatalError("Failed to load ")
+            }
+            DispatchQueue.main.async {
+                self.menu = items
+            }
+        }
     }
 }

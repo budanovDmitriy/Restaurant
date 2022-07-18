@@ -12,7 +12,8 @@ struct RestaurantApp: App {
     var body: some Scene {
         let order = Order()
         let favorite = Favorite()
-
+        
+        
         WindowGroup {
             AppView().environmentObject(order)
                 .environmentObject(favorite)

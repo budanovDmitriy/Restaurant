@@ -13,6 +13,11 @@ struct MenuSection: Codable, Identifiable {
     var items: [MenuItem]
 }
 
+struct Payment: Codable {
+    let isSuccess: Int
+}
+
+
 struct MenuItem: Codable, Equatable, Identifiable {
     var id: UUID
     var name: String

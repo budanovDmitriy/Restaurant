@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct CheckoutView: View {
     
     @EnvironmentObject var order: Order
     @Environment(\.presentationMode) var presentationMode
+    @State private var shouldAnimate = false
     
     // Static data
     static let paymentTypes = ["Наличными", "Visa", "MasterCard", "Maestro", "Белкарт", "Мир"]
@@ -37,6 +39,8 @@ struct CheckoutView: View {
     
     var body: some View {
         Form {
+            
+            
             Section {
                 Picker("Выберите способ оплаты", selection: $paymentType) {
                     ForEach(Self.paymentTypes, id: \.self) { paymentTypeValue in
@@ -69,13 +73,13 @@ struct CheckoutView: View {
                 }.pickerStyle(SegmentedPickerStyle())
                 
             }
-            
+           
             Section ( header: Text("Итого: Рублей \(totalPrice, specifier: "%.2f")").font(.largeTitle)) {
                 Button("Подтвердить покупку") {
-                    // TODO: Включить спинер с загрузкой, сделать запрос на заказ
                     self.isShowingPaymentAlert.toggle()
-                    
+                    Helper().fetchPayment()
                 }
+                
             }
             
         }.navigationBarTitle("Заказ", displayMode: .inline)
@@ -84,13 +88,14 @@ struct CheckoutView: View {
                     title: Text("Платеж подтвержден"),
                     message: Text("Итого  \(totalPrice, specifier: "%2.f") рублей "),
                     dismissButton: .default(Text("Ok"), action: {
-                        
-                        
-                                    
+                     
+                       
                        
                         
                         order.clean()
                         presentationMode.wrappedValue.dismiss()
+                        
+                        
                         // TODO: Выключить спинер
                     })
                 )

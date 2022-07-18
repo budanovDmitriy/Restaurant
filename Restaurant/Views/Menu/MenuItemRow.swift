@@ -32,7 +32,8 @@ struct MenuItemRow: View {
                 Spacer()
             
                 Stepper(
-                    "", onIncrement: {
+                    "",
+                    onIncrement: {
                             self.order.add(item: self.item)
                         },
                         onDecrement: {
