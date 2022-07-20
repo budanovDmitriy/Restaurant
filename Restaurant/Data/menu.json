@@ -77,7 +77,7 @@
         "items": [
             {
                 "id": "90100A7B-9850-4222-AFA0-AE8062390D57",
-                "name": "Филе Миньон",
+                "name": "Филе  Миньон",
                 "imageName": "minion",
                 "nationalDish": "Франция",
                 "price": 32,
@@ -87,7 +87,7 @@
             },
             {
                 "id": "83BE5105-859D-4E33-B148-3A07B8B224DA",
-                "name": "Медальоны",
+                "name": "Медальоны из свинины",
                 "imageName": "medalon",
                 "nationalDish": "Франция",
                 "price": 45,
