@@ -12,7 +12,7 @@ struct CheckoutView: View {
     
     @EnvironmentObject var order: Order
     @Environment(\.presentationMode) var presentationMode
-    @State private var shouldAnimate = false
+    @State private var successPayment = false
     
     // Static data
     static let paymentTypes = ["Наличными", "Visa", "MasterCard", "Maestro", "Белкарт", "Мир"]
@@ -73,13 +73,11 @@ struct CheckoutView: View {
                 }.pickerStyle(SegmentedPickerStyle())
                 
             }
-           
+            
             Section ( header: Text("Итого: Рублей \(totalPrice, specifier: "%.2f")").font(.largeTitle)) {
                 Button("Подтвердить покупку") {
-                    self.isShowingPaymentAlert.toggle()
-                    Helper().fetchPayment()
+                     fetchPayment()
                 }
-                
             }
             
         }.navigationBarTitle("Заказ", displayMode: .inline)
@@ -88,15 +86,8 @@ struct CheckoutView: View {
                     title: Text("Платеж подтвержден"),
                     message: Text("Итого  \(totalPrice, specifier: "%2.f") рублей "),
                     dismissButton: .default(Text("Ok"), action: {
-                     
-                       
-                       
-                        
                         order.clean()
                         presentationMode.wrappedValue.dismiss()
-                        
-                        
-                        // TODO: Выключить спинер
                     })
                 )
             }
@@ -109,6 +100,24 @@ struct CheckoutView_Previews: PreviewProvider {
     
     static var previews: some View {
         CheckoutView().environmentObject(order)
+    }
+}
+
+extension CheckoutView {
+    func fetchPayment()  {
+        
+        let request = AF.request("https://raw.githubusercontent.com/budanovDmitriy/Restaurant/main/Restaurant/Data/makeOrder.json")
+        request.validate().response { response in
+            guard let jsonData = response.data else {
+                fatalError("Failed to load ")
+            }
+            let payment = try? JSONDecoder().decode(Payment.self, from: jsonData)
+            DispatchQueue.main.async {
+                if payment?.isSuccess == 1 {
+                    self.isShowingPaymentAlert.toggle()
+                }
+            }
+        }
     }
 }
 

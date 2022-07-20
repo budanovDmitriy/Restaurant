@@ -13,20 +13,9 @@ import SwiftUI
 
 
 class Helper {
+    var successPayment : Bool = Bool()
     
-    
-    func fetchPayment() {
-        var jsonData: Data = Data()
-        let request = AF.request("https://github.com/budanovDmitriy/Restaurant/blob/main/Restaurant/Data/makeOrder.json")
-        request.validate().response { response in
-            guard let items = response.value else {
-                fatalError("Failed to load ")
-            }
-            jsonData = items ?? Data()
-        }
-        let payment = try? JSONDecoder().decode(Payment.self, from: jsonData)
-        print(payment ?? "free")
-    }
+   
 }
 
 struct ActivityIndicator: UIViewRepresentable {
