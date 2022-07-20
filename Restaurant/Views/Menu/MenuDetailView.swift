@@ -24,7 +24,7 @@ struct MenuDetailView: View {
                     .background(Color.black)
                     .font(.caption)
                     .foregroundColor(.white)
-                    .offset(x: -100, y: -5)
+                    .offset(x: -10, y: -5)
             }
             
             Text(item.description)
