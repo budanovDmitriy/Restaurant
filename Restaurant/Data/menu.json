@@ -15,7 +15,7 @@
             },
 			{
                 "id": "36A7CC40-18C1-48E5-BCD8-3B42D43BEAEE",
-				"name": "Том ям с морепродуктами",
+				"name": "Том ям",
                 "imageName": "tomyam",
                 "nationalDish": "Таиланд",
 				"price": 25,
@@ -97,7 +97,7 @@
             },
             {
                 "id": "75DE204A-0045-4646-8895-D0E6CC1A8B8E",
-                "name": "Стейк из лосося со шпинатом",
+                "name": "Стейк из лосося",
                 "imageName": "losos",
                 "nationalDish": "Англия",
                 "price": 40,

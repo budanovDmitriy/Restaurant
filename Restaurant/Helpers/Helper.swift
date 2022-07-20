@@ -11,13 +11,6 @@ import SwiftUI
 
 
 
-
-class Helper {
-    var successPayment : Bool = Bool()
-    
-   
-}
-
 struct ActivityIndicator: UIViewRepresentable {
     @Binding var shouldAnimate: Bool
     
